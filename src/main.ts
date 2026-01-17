@@ -4,18 +4,30 @@ import * as fs from 'fs'
 
 // solution files
 import day1 from './Day1.js'
+import day2 from './Day2.js'
+
+const solutions : ((inputStr : string) => void)[] = [day1, day2]
 
 
 
-function printDay1() : void {
-    console.log("Printing Day 1 Solution...")
-    const input = fs.readFileSync('./input/day1.txt', 'utf-8')
+function printSolution(day : number) : void {
 
-    day1(input)
+    if (day <= solutions.length) {
+        // grab appropriate input file and call the day's (string => void)
+        console.log(`Printing Day ${day} Solution...`)
+        const input = fs.readFileSync(`./input/day${day}.txt`, 'utf-8')
+        
+        solutions[day - 1](input);
+    }
+    else {
+        console.log(`Invalid Day. Please enter a number between 1 and ${solutions.length-1}`)
+    }
+
+
 }
 
 function main() : void {
-    printDay1();
+    printSolution(2);
 }
 
 
