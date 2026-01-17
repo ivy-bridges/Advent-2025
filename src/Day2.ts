@@ -1,12 +1,18 @@
 
 
 // detects whether a string is a repeated set of digits
-function isRepeat(idStr : string) : boolean {
-    return !!idStr.match(/^(\d+)\1$/)
+// parts 1 and 2 differ on how many repetitions are allowed
+function isRepeat(idStr : string, allowMultiple : boolean) : boolean {
+    // part 1 only counts if it is repeated exactly twice
+    if (!allowMultiple) {
+        return !!idStr.match(/^(\d+)\1$/)
+    }
+    // part 2 counts it regardless how many repetitions it makes
+    return !!idStr.match(/^(\d+)\1+$/)
 }
 
-function isInvalidID (idNum : number) : boolean {
-    return isRepeat(idNum.toString())
+function isInvalidID (idNum : number, allowMultiple : boolean) : boolean {
+    return isRepeat(idNum.toString(), allowMultiple)
 }
 
 
@@ -23,11 +29,11 @@ function getSum(numList : number[]) : number {
 
 
 // given some set of bounds, takes the range and returns a list of invalid ids in that range
-function findInvalidIDs([lower, upper] : [number, number]) : number[] {
+function findInvalidIDs([lower, upper] : [number, number], allowMultiple : boolean) : number[] {
 
     let invalidIDs = [];
     for (let i = lower; i < upper; i++) {
-        if (isInvalidID(i)) {
+        if (isInvalidID(i, allowMultiple)) {
             invalidIDs.push(i)
         }
     }
@@ -37,9 +43,9 @@ function findInvalidIDs([lower, upper] : [number, number]) : number[] {
 
 // given some set of [lower, upper] ranges
 // finds the sum of the invalid ids in each range and totals them up
-function sumInvalidIDs (idRanges : [number, number][]) : number {
+function sumInvalidIDs (idRanges : [number, number][], allowMultiple : boolean) : number {
     return idRanges.reduce<number>(
-        (invalidSum, idRange) => invalidSum + getSum(findInvalidIDs(idRange)),
+        (invalidSum, idRange) => invalidSum + getSum(findInvalidIDs(idRange, allowMultiple)),
         0 
     )
 }
@@ -48,6 +54,7 @@ export default function day2(inputString : string) : void {
     let idStrings = inputString.split(',')
     let idRanges = idStrings.map(grabRange)
 
-    console.log(`Part 1: ${sumInvalidIDs(idRanges)}`)
+    console.log(`Part 1: ${sumInvalidIDs(idRanges, false)}`)
+    console.log(`Part 2: ${sumInvalidIDs(idRanges, true)}`)
 
 }
