@@ -25,8 +25,7 @@ function findInvalids(idRange : string) : number[] {
             invalidIDs.push(i)
         }
     }
-    return invalidIDs; // probably possible to do this non-imperatively
+    return invalidIDs; // possible to do this non-imperatively?
  }
 
 
- 
