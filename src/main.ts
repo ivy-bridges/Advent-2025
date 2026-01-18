@@ -5,8 +5,9 @@ import * as fs from 'fs'
 // solution files
 import day1 from './Day1.js'
 import day2 from './Day2.js'
+import day3 from './Day3.js'
 
-const solutions : ((inputStr : string) => void)[] = [day1, day2]
+const solutions : ((inputStr : string) => void)[] = [day1, day2, day3]
 
 
 
@@ -27,7 +28,7 @@ function printSolution(day : number) : void {
 }
 
 function main() : void {
-    printSolution(2);
+    printSolution(3);
 }
 
 
