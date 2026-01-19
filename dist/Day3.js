@@ -1,7 +1,6 @@
 // given some line of digits, returns an array of battery joltage ratings
 function parseBatteryBank(bankString) {
     let digitArray = bankString.split('').map(d => parseInt(d));
-    //  console.log(digitArray)
     return bankString.split('').map(d => parseInt(d));
 }
 // given some array of batteries, finds the highest producible joltage
@@ -19,21 +18,21 @@ function sumPairJoltages(batteryBanks) {
 }
 // for part 2, we instead recursively select the highest available digit
 // we are bounded by needing to ensure there are at least enough digits remaining at each step to fill in a count of 12
-// for an m-length array, with n digits remaining, the next pick needs to have index no higher than m-n to ensure n-1 digits remain
 function selectHighest(batteryBank, selectionList = [], digitCount = 12) {
     const availableDigits = batteryBank.slice(0, batteryBank.length - digitCount + 1);
     // we're always going to take the first possible instance, so indexOf works fine here
     const nextDigit = Math.max(...availableDigits);
     // remainder of array after plucking out our pick
     const remainingDigits = batteryBank.slice(batteryBank.indexOf(nextDigit) + 1);
+    // after selecting, we either return or recurse
     if (digitCount == 1) { // if this is the last digit we need, return what we've selected
         return selectionList.concat(nextDigit);
     }
-    else { // otherwise, recurse, knowing we've got a weaker restriction
+    else { // otherwise, recurse with the remaining digits, placing a weaker restriction on digits remaining
         return selectHighest(remainingDigits, selectionList.concat(nextDigit), digitCount - 1);
     }
 }
-// given some battery bank, finds the joltage produced by a 12-digit set
+// given some battery bank, finds the joltage produced by a 12-digit selection
 // concatenates and parses the found digits
 function findDozenJoltage(batteryBank) {
     const batteryPicks = selectHighest(batteryBank);
