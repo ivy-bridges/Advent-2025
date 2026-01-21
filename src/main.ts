@@ -7,8 +7,9 @@ import day1 from './Day1.js'
 import day2 from './Day2.js'
 import day3 from './Day3.js'
 import day4 from './Day4.js'
+import day5 from './Day5.js'
 
-const solutions : ((inputStr : string) => void)[] = [day1, day2, day3, day4]
+const solutions : ((inputStr : string) => void)[] = [day1, day2, day3, day4, day5]
 
 
 
@@ -29,7 +30,7 @@ function printSolution(day : number) : void {
 }
 
 function main() : void {
-    printSolution(4);
+    printSolution(5);
 }
 
 

@@ -5,7 +5,8 @@ import day1 from './Day1.js';
 import day2 from './Day2.js';
 import day3 from './Day3.js';
 import day4 from './Day4.js';
-const solutions = [day1, day2, day3, day4];
+import day5 from './Day5.js';
+const solutions = [day1, day2, day3, day4, day5];
 function printSolution(day) {
     if (day <= solutions.length) {
         // grab appropriate input file and call the day's (string => void)
@@ -18,7 +19,7 @@ function printSolution(day) {
     }
 }
 function main() {
-    printSolution(4);
+    printSolution(5);
 }
 main();
 //# sourceMappingURL=main.js.map
